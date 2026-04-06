@@ -1,45 +1,15 @@
 {
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "productName": "GitSail",
+  "version": "0.1.0",
+  "identifier": "com.gitsail.app",
   "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
     "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "beforeBuildCommand": "npm run build"
   },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "dialog": {
-        "all": false,
-        "open": true
-      },
-      "fs": {
-        "all": true,
-        "readFile": true,
-        "writeFile": true,
-        "readDir": true,
-        "copyFile": true,
-        "createDir": true,
-        "removeDir": true,
-        "removeFile": true,
-        "renameFile": true,
-        "exists": true,
-        "scope": ["**"]
-      },
-      "path": {
-        "all": true
-      },
-      "os": {
-        "all": true
-      },
-      "process": {
-        "all": false,
-        "relaunch": true
-      }
-    },
+  "app": {
     "windows": [
       {
         "title": "GitSail - Git项目管理",
@@ -48,26 +18,22 @@
         "minWidth": 800,
         "minHeight": 600,
         "center": true,
-        "resizable": true,
-        "fullscreen": false,
-        "decorations": true,
-        "transparent": false
+        "resizable": true
       }
     ],
     "security": {
       "csp": null
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.gitsail.app",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ]
     }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["msi", "nsis"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
   }
 }
