@@ -6,7 +6,7 @@ import AddProjectDialog from './AddProjectDialog'
 import { useState } from 'react'
 
 export default function Layout() {
-  const { projects, activeProjectId } = useProjectStore()
+  const { projects } = useProjectStore()
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
   return (
