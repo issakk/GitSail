@@ -12,7 +12,7 @@ pub struct ProjectInfo {
 }
 
 impl ProjectInfo {
-    pub fn from_repo(path: &str, repo: &GitRepo) -> Result<Self, String> {
+    pub fn from_repo(path: &str, _repo: &GitRepo) -> Result<Self, String> {
         let name = std::path::Path::new(path)
             .file_name()
             .and_then(|n| n.to_str())

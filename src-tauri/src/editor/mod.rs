@@ -1,6 +1,5 @@
 use std::fs;
 use std::path::Path;
-use walkdir::WalkDir;
 use serde::Serialize;
 
 #[derive(Serialize)]

@@ -4,7 +4,7 @@ use std::path::Path;
 
 use crate::git::{GitRepo, FileStatus, Branch, Commit, Diff};
 use crate::project::ProjectInfo;
-use crate::editor::{read_file as editor_read_file, write_file as editor_write_file, list_directory};
+use crate::editor::{read_file as editor_read_file, write_file as editor_write_file, list_directory, FileItem};
 use crate::claude::{launch_claude, is_claude_installed};
 
 // ============== 项目相关命令 ==============
@@ -153,14 +153,6 @@ pub fn git_diff(path: String, file_path: Option<String>, staged: Option<bool>) -
 }
 
 // ============== 文件系统相关命令 ==============
-
-#[derive(Serialize)]
-pub struct FileItem {
-    name: String,
-    path: String,
-    is_directory: bool,
-    children: Option<Vec<FileItem>>,
-}
 
 #[command]
 pub fn read_directory(path: String, recursive: Option<bool>) -> Result<Vec<FileItem>, String> {

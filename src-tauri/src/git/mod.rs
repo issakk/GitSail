@@ -1,4 +1,4 @@
-use git2::{Repository, StatusOptions, StatusShow, BranchType, Oid, DiffOptions};
+use git2::{Repository, StatusOptions, BranchType};
 use serde::Serialize;
 use std::path::Path;
 
@@ -78,12 +78,8 @@ impl GitRepo {
         let head = self.repo.head().map_err(|e| e.to_string())?;
         let branch_name = head.shorthand().unwrap_or("HEAD").to_string();
 
-        // 获取分支的 ahead/behind
-        let (ahead, behind) = if let Ok(upstream) = head.resolve().unwrap().remote() {
-            (0, 0) // TODO: 实现正确的 ahead/behind 计算
-        } else {
-            (0, 0)
-        };
+        // TODO: 实现正确的 ahead/behind 计算
+        let (ahead, behind) = (0, 0);
 
         let mut opts = StatusOptions::new();
         opts.include_untracked(true)
@@ -197,19 +193,9 @@ impl GitRepo {
     }
 
     pub fn unstage(&self, path: &str) -> Result<(), String> {
-        let head = self.repo.head().map_err(|e| e.to_string())?;
-        let head_commit = self.repo.find_commit(head.target().unwrap())
-            .map_err(|e| e.to_string())?;
-        let head_tree = head_commit.tree().map_err(|e| e.to_string())?;
-
         let mut index = self.repo.index().map_err(|e| e.to_string())?;
+        // 从暂存区移除文件
         index.remove_path(Path::new(path)).map_err(|e| e.to_string())?;
-
-        // 恢复到 HEAD 状态
-        if let Ok(entry) = head_tree.get_path(Path::new(path)) {
-            index.add(&entry).map_err(|e| e.to_string())?;
-        }
-
         index.write().map_err(|e| e.to_string())?;
         Ok(())
     }
@@ -249,7 +235,7 @@ impl GitRepo {
             &signature,
             message,
             &tree,
-            &parents.iter().collect::<Vec<_>>(),
+            &parents,
         ).map_err(|e| e.to_string())?;
 
         Ok(commit_oid.to_string())
@@ -296,7 +282,7 @@ impl GitRepo {
         Ok(())
     }
 
-    pub fn diff(&self, file_path: Option<&str>, staged: bool) -> Result<Diff, String> {
+    pub fn diff(&self, file_path: Option<&str>, _staged: bool) -> Result<Diff, String> {
         // TODO: 实现 diff 功能
         // 返回文件的差异信息
         Ok(Diff {
