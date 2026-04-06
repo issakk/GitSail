@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { FolderOpen, Loader2 } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { useProjectStore } from '@/stores/useProjectStore'
@@ -24,7 +24,9 @@ export default function AddProjectDialog({ open, onOpenChange }: AddProjectDialo
     input.onchange = (e) => {
       const files = (e.target as HTMLInputElement).files
       if (files && files.length > 0) {
-        const folderPath = files[0].path || files[0].webkitRelativePath.split('/')[0]
+        // 使用 webkitRelativePath 获取路径
+        const relativePath = files[0].webkitRelativePath
+        const folderPath = relativePath ? relativePath.split('/')[0] : files[0].name
         setPath(folderPath)
         // 从路径提取默认名称
         const defaultName = folderPath.split(/[/\\]/).pop() || ''

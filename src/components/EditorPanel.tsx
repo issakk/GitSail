@@ -74,7 +74,7 @@ export function EditorPanel() {
         {activeTab ? (
           <textarea
             value={activeTab.content}
-            onChange={(e) => {
+            onChange={() => {
               // TODO: 更新内容
             }}
             className="w-full h-full p-4 font-mono text-sm resize-none focus:outline-none bg-background"

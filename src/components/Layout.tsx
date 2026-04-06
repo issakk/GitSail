@@ -9,8 +9,6 @@ export default function Layout() {
   const { projects, activeProjectId } = useProjectStore()
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
-  const activeProject = projects.find(p => p.id === activeProjectId)
-
   return (
     <div className="flex h-screen bg-background">
       {/* 侧边栏 */}

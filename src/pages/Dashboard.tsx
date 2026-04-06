@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useProjectStore } from '@/stores/useProjectStore'
-import { GitBranch, Clock, Folder, MoreVertical, Trash2, ExternalLink } from 'lucide-react'
+import { GitBranch, Clock, Folder, Trash2 } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { Link } from 'react-router-dom'
 

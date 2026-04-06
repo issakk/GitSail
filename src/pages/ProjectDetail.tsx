@@ -5,7 +5,6 @@ import { GitPanel } from '@/components/GitPanel'
 import { FileExplorer } from '@/components/FileExplorer'
 import { EditorPanel } from '@/components/EditorPanel'
 import { ClaudePanel } from '@/components/ClaudePanel'
-import { cn } from '@/utils/cn'
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>()

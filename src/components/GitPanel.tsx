@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react'
-import { GitBranch, GitCommit, GitPullRequest, GitMerge, Plus, Check, RefreshCw } from 'lucide-react'
+import { Plus, Check, RefreshCw } from 'lucide-react'
 import { cn } from '@/utils/cn'
-import type { RepoStatus, Branch, Commit } from '@/types'
+import type { RepoStatus } from '@/types'
 
 interface GitPanelProps {
   projectId: string
   projectPath: string
 }
 
-export function GitPanel({ projectId, projectPath }: GitPanelProps) {
+export function GitPanel({ projectPath }: GitPanelProps) {
   const [activeTab, setActiveTab] = useState<'changes' | 'history' | 'branches'>('changes')
   const [repoStatus, setRepoStatus] = useState<RepoStatus | null>(null)
-  const [branches, setBranches] = useState<Branch[]>([])
-  const [commits, setCommits] = useState<Commit[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [commitMessage, setCommitMessage] = useState('')
 
